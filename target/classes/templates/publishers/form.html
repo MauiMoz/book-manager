@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Publisher Form</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    </head>
+    <body>
+        <nav>
+            <a href="/books">Books</a>
+            <a href="/genres">Genres</a>
+            <a href="/publishers">Publishers</a>
+        </nav>
+
+        <h1 th:text="${publisher.id == null ? 'Add Publisher' : 'Edit Publisher'}"></h1>
+
+        <form th:action="${publisher.id == null ? '/publishers' : '/publishers/update/' + publisher.id}"
+              th:object="${publisher}" method="post">
+            <label>Name
+                <input th:field="*{name}" placeholder="Publisher name"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </label>
+            <fieldset>
+                <legend>Address</legend>
+                <label>Street
+                    <input th:field="*{address.street}" placeholder="Street"/>
+                    <span th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}"></span>
+                </label>
+                <label>Number
+                    <input th:field="*{address.number}" placeholder="Number"/>
+                    <span th:if="${#fields.hasErrors('address.number')}" th:errors="*{address.number}"></span>
+                </label>
+                <label>City
+                    <input th:field="*{address.city}" placeholder="City"/>
+                    <span th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}"></span>
+                </label>
+                <label>Postal code
+                    <input th:field="*{address.postalCode}" placeholder="Postal code"/>
+                    <span th:if="${#fields.hasErrors('address.postalCode')}" th:errors="*{address.postalCode}"></span>
+                </label>
+                <label>Nation
+                    <input th:field="*{address.nation}" placeholder="Nation"/>
+                    <span th:if="${#fields.hasErrors('address.nation')}" th:errors="*{address.nation}"></span>
+                </label>
+            </fieldset>
+            <button type="submit">Save</button>
+            <a href="/publishers">Cancel</a>
+        </form>
+    </body>
+</html>
